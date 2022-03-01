@@ -1,0 +1,5 @@
+如需使用EWF的HORM（一次休眠多次启动）功能
+
+把horm.dat复制进启动分区BOOT目录
+用相应版本的winresume.exe替换掉系统里的，文件位置System32\，System32\boot\ 两处
+用bootmgr替换掉你启动分区上的bootmgr文件

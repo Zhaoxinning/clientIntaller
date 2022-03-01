@@ -1,0 +1,41 @@
+void CustomMessageBox::OnPaint() 
+{
+	CPaintDC dc(this); // device context for painting
+
+	//改变边框
+	CRect rect,ClientRect; 
+	GetClientRect(ClientRect); 
+	CBrush brBtnShadow(HIGHTLIGHT_FORE_STATIC_TEXT_COLOR);
+	dc.FrameRect(&ClientRect, &brBtnShadow);
+
+	ReleaseDC(&dc);
+	// Do not call CDialog::OnPaint() for painting messages
+}
+
+HBRUSH CustomMessageBox::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor) 
+{
+	HBRUSH hbr = CDialog::OnCtlColor(pDC, pWnd, nCtlColor);
+	
+	// TODO: Change any attributes of the DC here
+	int DlgID;	
+	
+	DlgID=pWnd->GetDlgCtrlID();
+	if(DlgID==IDC_STATIC_MESSAGEBOX_TOPIC)
+	{	
+		m_Brush.CreateSolidBrush(SUBDIALOG_TOPIC_BKG);
+		pDC-> SetTextColor(THE_SECOND_BACKGROUND_COLOR); //字体颜色
+		pDC-> SetBkMode(TRANSPARENT); //设置字体背景为透明
+		//pDC-> SetBkColor(RGB(255,0,0));  //字体背景色
+		return m_Brush;
+	}
+	// TODO: Return a different brush if the default is not desired
+	return hbr;
+}
+
+
+
+	afx_msg void OnPaint();
+	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
+
+
+       CBrush m_Brush;
